@@ -20,7 +20,7 @@ def updateTree(course):
                 result.append(c[e])
             except:
                 pass
-        if int(c['limit']) > int(c['seleced_no']):
+        if int(float(c['limit'])) > int(float(c['seleced_no'])):
             tree.insert("",index=END, text=c[enlab[0]], values=result, tags = ('available',))
         else:
             tree.insert("",index=END, text=c[enlab[0]], values=result)

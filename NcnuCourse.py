@@ -22,7 +22,7 @@ class Course():
 
     def getCourse(self, url = None):
         if url is None:
-            url = 'https://ccweb.ncnu.edu.tw/student/aspmaker_course_opened_detail_viewlist.php?cmd=search&t=aspmaker_course_opened_detail_view&z_year=%3D&x_year=1072&z_courseid=%3D&x_courseid=&z_cname=LIKE&x_cname=&z_deptid=%3D&x_deptid=99&z_division=LIKE&x_division=&z_grade=%3D&x_grade=&z_teachers=LIKE&x_teachers=&z_not_accessible=LIKE&x_not_accessible='
+            url = 'https://ccweb.ncnu.edu.tw/student/aspmaker_course_opened_detail_viewlist.php?cmd=search&t=aspmaker_course_opened_detail_view&z_year=%3D&x_year=1072&z_courseid=%3D&x_courseid=&z_cname=LIKE&x_cname=&z_deptid=%3D&x_deptid=99&z_division=LIKE&x_division=&z_grade=%3D&x_grade=&z_teachers=LIKE&x_teachers=&z_not_accessible=LIKE&recperpage=10000&x_not_accessible='
 
         res = requests.get(url, headers=self.headers)
         soup = BeautifulSoup(res.text,"html.parser")
@@ -39,13 +39,13 @@ class Course():
                 d[t] = tbl[j].text.strip()
             course.append(d)
 
-        changeOption = soup.find_all("div", class_="input-group-btn")[1].find('a').attrs
+        # changeOption = soup.find_all("div", class_="input-group-btn")[1].find('a').attrs
 
-        if 'href' in changeOption:
-            nextUrl = 'https://ccweb.ncnu.edu.tw/student/' + changeOption['href']
-            return course + self.getCourse(nextUrl)
-        else:
-            return course
+        # if 'href' in changeOption:
+        #     nextUrl = 'https://ccweb.ncnu.edu.tw/student/' + changeOption['href']
+        #     return course + self.getCourse(nextUrl)
+        # else:
+        return course
 
     def getClassification(self):
         url = 'https://ccweb.ncnu.edu.tw/student/ncnu_coremin_detail_viewlist.php'
